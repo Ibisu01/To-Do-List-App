@@ -1,5 +1,7 @@
 <?php
+// This MUST be the very first thing in the file
 session_start();
+
 $host = 'localhost';
 $dbname = 'user_auth'; 
 $username = 'root'; 
@@ -12,6 +14,7 @@ try {
     die("ERROR: Could not connect. " . $e->getMessage());
 }
 
+// --- REGISTRATION BLOCK ---
 if (isset($_POST['register'])) {
     $name = htmlspecialchars(trim($_POST['name']));
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
@@ -29,9 +32,11 @@ if (isset($_POST['register'])) {
                 ':password' => $hashed_password
             ]);
 
-            // Redirect to the to-do app instead of showing a text link
+            // FIX: Log the user in immediately after registering
+            $_SESSION['user_id'] = $pdo->lastInsertId();
+
+            // Redirect to the to-do app
             header("Location: to-do.html");
-            $_SESSION['user_id'] = $user['id'];
             exit();
             
         } catch(PDOException $e) {
@@ -46,6 +51,7 @@ if (isset($_POST['register'])) {
     }
 }
 
+// --- LOGIN BLOCK ---
 if (isset($_POST['login'])) {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $pass = $_POST['password'];
@@ -59,7 +65,11 @@ if (isset($_POST['login'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['password'])) {
-            // Redirect to the to-do app instead of showing text
+            
+            // FIX: Save the user's ID to the session
+            $_SESSION['user_id'] = $user['id'];
+            
+            // Redirect to the to-do app
             header("Location: to-do.html");
             exit();
         } else {
