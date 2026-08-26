@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $host = 'localhost';
 $dbname = 'user_auth'; 
 $username = 'root'; 
@@ -31,6 +31,7 @@ if (isset($_POST['register'])) {
 
             // Redirect to the to-do app instead of showing a text link
             header("Location: to-do.html");
+            $_SESSION['user_id'] = $user['id'];
             exit();
             
         } catch(PDOException $e) {
