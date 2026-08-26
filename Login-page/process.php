@@ -29,7 +29,9 @@ if (isset($_POST['register'])) {
                 ':password' => $hashed_password
             ]);
 
-            echo "Registration successful! <a href='index.html'>Go back</a>";
+            // Redirect to the to-do app instead of showing a text link
+            header("Location: to-do.html");
+            exit();
             
         } catch(PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -56,7 +58,9 @@ if (isset($_POST['login'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($pass, $user['password'])) {
-            echo "Login successful! Welcome back, " . $user['name'] . ".";
+            // Redirect to the to-do app instead of showing text
+            header("Location: to-do.html");
+            exit();
         } else {
             echo "Invalid email or password.";
         }
