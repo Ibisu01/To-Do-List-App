@@ -2,19 +2,33 @@
 <html lang="en">
     
 <head>
+    <!-- Character encoding and responsive viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- External CSS libraries for styling (Bootstrap) and icons (FontAwesome) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Link to your custom stylesheet -->
     <link rel="stylesheet" href="style.css">
     <title>Animated Login Page</title>
 </head>
 
+<!-- The body uses Bootstrap utility classes to center everything on the screen -->
 <body class="d-flex align-items-center justify-content-center vh-100 flex-column">
+    
+    <!-- This is the main white container box that holds everything -->
     <div class="container custom-container" id="container">
+        
+        <!-- --- REGISTRATION FORM PANEL --- -->
+        <!-- This div sits on the left and holds the "Sign Up" form -->
         <div class="form-container sign-up">
+            <!-- Form submits data to process.php using the POST method -->
             <form method="POST" action="process.php">
                 <h1>Create Account</h1>
+                
+                <!-- Placeholder social media login icons -->
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
@@ -22,16 +36,24 @@
                 </div>
                 
                 <span>or use your email for registration</span>
+                <!-- Required input fields for Name, Email, and Password -->
                 <input type="text" name="name" placeholder="Name" class="form-control mb-2" required>
                 <input type="email" name="email" placeholder="Email" class="form-control mb-2" required>
                 <input type="password" name="password" placeholder="Password" class="form-control mb-2" required>
+                
+                <!-- Submit button linked to the 'register' block in your PHP -->
                 <button type="submit" name="register" class="btn custom-btn">Sign Up</button>
             </form>
         </div>
         
+        <!-- --- LOGIN FORM PANEL --- -->
+        <!-- This div sits on the right (initially) and holds the "Sign In" form -->
         <div class="form-container sign-in">
+            <!-- Form submits data to process.php using the POST method -->
             <form method="POST" action="process.php">
                 <h1>Sign In</h1>
+                
+                <!-- Placeholder social media login icons -->
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
@@ -39,31 +61,43 @@
                 </div>
 
                 <span>or use your email password</span>
+                <!-- Required input fields for Email and Password -->
                 <input type="email" name="email" placeholder="Email" class="form-control mb-2" required>
                 <input type="password" name="password" placeholder="Password" class="form-control mb-2" required>
                 <a href="#">Forgot Password</a>
+                
+                <!-- Submit button linked to the 'login' block in your PHP -->
                 <button type="submit" name="login" class="btn custom-btn">Sign In</button>
             </form>
         </div>
         
+        <!-- --- OVERLAY & TOGGLE BUTTONS --- -->
+        <!-- This container holds the purple sliding overlay -->
         <div class="toggle-container">
             <div class="toggle">
+                
+                <!-- Text and button that appear when asking the user to Sign In -->
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
                     <p>Enter your personal details to enjoy full site features</p>
                     <button class="btn hidden" id="login">Sign In</button>
                 </div>
+                
+                <!-- Text and button that appear when asking the user to Sign Up -->
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Friend!</h1>
                     <p>Register with your personal details to enjoy full site features</p>
+                    <!-- Clicking this triggers the JS animation -->
                     <button class="btn hidden" id="register">Sign Up</button>
                 </div>
             </div>
         </div>
     </div>    
 
-
+    <!-- External Bootstrap JS library for interactive components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Link to your custom JavaScript that handles the sliding animation -->
     <script src="script.js"></script>
 </body>
 </html>
